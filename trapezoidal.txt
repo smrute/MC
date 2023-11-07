@@ -1,0 +1,48 @@
+#include<reg51.h>
+void dac_init(void);
+void dac_output(unsigned char i);
+void msdelay(unsigned int x);
+void trapezoidal(void);
+void main ()
+{
+	dac_init();
+	while(1)
+	{
+		trapezoidal();
+	}
+}
+void dac_init()
+{
+	P1 = 0x00;
+}
+void dac_output(unsigned char i)
+{
+	P1 = i;
+}
+void trapezoidal()
+{
+	unsigned int x ;
+	for(x=0;x<=0x80;x++)
+	{
+	  dac_output(x);
+	  msdelay(100);}
+	
+	for(x=0x80;x<=0xFF;x++)
+	{
+	  P1 = 0xFF;
+	  msdelay(100);}
+	
+	for(x=0xFF;x>0x80;x--){
+		dac_output(x);
+	  msdelay(100);}
+	
+	for(x=0x88;x>0;x--){
+		P1=0x00;
+	  msdelay(100);}
+}
+void msdelay(unsigned int x)
+{
+	unsigned int i,j;
+	for(i=0;i<=x;i++)
+		for(j=0;j<=1275;j++);
+}
