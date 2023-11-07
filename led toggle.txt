@@ -1,0 +1,19 @@
+#include<reg51.h>
+void msdelay(unsigned int i);
+void main()
+{while(1)
+	{
+	P1 = 0x00;
+	msdelay(100);
+	P1 = 0xAA;
+  msdelay(100);
+	}
+}
+void msdelay(unsigned int i)
+{
+	unsigned int x,y;
+	for(x=0;x<=i;x++)
+	{
+		for(y=0;y<=1275;y++);
+	}
+}
