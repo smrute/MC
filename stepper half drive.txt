@@ -1,0 +1,29 @@
+#include<reg51.h>
+void ms_delay(unsigned int t) 
+ {
+	 unsigned i,j ;
+	 for(i=0;i<t;i++) 
+	 for(j=0;j<1275;j++);
+ }
+void main()
+{
+	 while (1) 
+	 {
+		 P2 = 0x08; 
+		 ms_delay(200);
+		 P2 = 0x0C;
+		 ms_delay(200);
+		 P2 = 0x04; 
+		 ms_delay(200);
+		 P2 = 0x06;
+		 ms_delay(200);
+		 P2 = 0x02; 
+		 ms_delay(200); 
+		 P2 = 0x03; 
+		 ms_delay(200); 
+		 P2 = 0x01; 
+		 ms_delay(200); 
+		 P2 = 0x09; 
+		 ms_delay(200); 
+	 }
+}
