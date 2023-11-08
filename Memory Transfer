@@ -1,0 +1,16 @@
+#include <reg51.h>
+
+void main(void)
+{
+    unsigned char myNum[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0xA, 0xB, 0xC, 0xD};
+    unsigned char z;
+
+  
+    P1 = 0x00; // Initialize Port 1 to 0
+
+    for (z = 0; z <= 0xD; z++)
+    {
+        P1 = myNum[z]; 
+        
+		}
+}
