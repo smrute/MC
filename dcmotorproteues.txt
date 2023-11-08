@@ -1,0 +1,37 @@
+#include <reg51.h>
+
+sbit MotorInput1 = P0^0;
+sbit MotorInput2 = P0^1;
+
+void delay(unsigned int time) {
+    unsigned int i, j;
+    for (i = 0; i < time; i++)
+        for (j = 0; j < 1275; j++);
+}
+
+void main() {
+    MotorInput1 = 0;
+    MotorInput2 = 0;
+
+    while (1) {
+        // Move the motor forward
+        MotorInput1 = 1;
+        MotorInput2 = 0;
+        delay(1000);
+
+        // Stop the motor
+        MotorInput1 = 0;
+        MotorInput2 = 0;
+        delay(1000);
+
+        // Move the motor backward
+        MotorInput1 = 0;
+        MotorInput2 = 1;
+        delay(1000);
+
+        // Stop the motor
+        MotorInput1 = 0;
+        MotorInput2 = 0;
+        delay(1000);
+    }
+}
