@@ -1,0 +1,47 @@
+#include<p18f4550.h>
+ #pragma config FOSC = HS;
+ #pragma config WDT = OFF;
+ #pragma config LVP = OFF; #pragma config PBADEN = OFF;
+ void delay(void); 
+void main()
+ { 	unsigned char i , key =0, P = 0x01;
+              TRISD = 0x00; //LED OUTPUT 	
+TRISBbits.TRISB4 = 1; //sw1 	
+TRISBbits.TRISB5 = 1; //sw2 	
+TRISCbits.TRISC1 = 0; //Relay 	
+TRISCbits.TRISC2 = 0; //Buzzer 	
+while(1) 	
+{ 		
+if(PORTBbits.RB4==0)key = 0; 		
+if(PORTBbits.RB5==0)key = 1; 		
+if(key==0) 		
+{ 			
+P = 0x80; 			
+PORTCbits.RC1 = 0; 			
+PORTCbits.RC2 = 1; 			
+for(i=0;i<=8;i++) 			
+{ 				
+PORTD = P; 			
+P=P>>1; 				
+delay(); 			
+} 		
+} 		
+if(key==1) 		
+{ 			
+PORTCbits.RC1 = 1; 			
+PORTCbits.RC2 = 0; 			
+P = 0x01; 			
+for(i=0;i<=8;i++) 			
+{ 				
+PORTD = P; 				
+P = P<<1; 		
+delay(); 			
+} 		
+} 	
+} 
+} 
+void delay() 
+{ 	
+unsigned int j;  	
+for(j=0;j<30000;j++); 
+ }
